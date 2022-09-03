@@ -20,20 +20,20 @@ import java.util.concurrent.TimeUnit;
 
 public class SeleniumPlayGround extends BasicOperations {
 
-    @BeforeTest
+    @BeforeTest (groups = {"even", "odd"})
     public void start() throws Exception {
         driver = startDriver();
         driver.get(data.getProperty("url"));
     }
 
-    @Test
+    @Test (groups = {"even"})
     public void firstTask() {
         TasksPage tp = new TasksPage(driver);
         String pageTitle =  driver.getTitle();
         tp.insertTitle().sendKeys(pageTitle);
     }
 
-    @Test
+    @Test (groups = {"odd"})
     public void secondTask() throws InterruptedException {
         TasksPage tp = new TasksPage(driver);
         String uncuted = tp.grabText().getText();
@@ -44,7 +44,7 @@ public class SeleniumPlayGround extends BasicOperations {
         tp.insertName().sendKeys(finalName);
     }
 
-    @Test
+    @Test (groups = {"even"})
     public void thirdTask() {
         TasksPage tp = new TasksPage(driver);
         tp.clickSelect().click();
@@ -52,7 +52,7 @@ public class SeleniumPlayGround extends BasicOperations {
         choose.selectByValue("scifiauthor");
     }
 
-    @Test
+    @Test (groups = {"odd"})
     public void fourthTask() {
         TasksPage tp = new TasksPage(driver);
         int xpathCount = tp.numberBlueBoxes().size();
@@ -60,48 +60,48 @@ public class SeleniumPlayGround extends BasicOperations {
         tp.insertCount().sendKeys(count);
     }
 
-    @Test
+    @Test (groups = {"even"})
     public void fifthTask() {
         TasksPage tp = new TasksPage(driver);
         tp.clickMe().click();
     }
 
-    @Test
+    @Test (groups = {"odd"})
     public void sixthTask() {
         TasksPage tp = new TasksPage(driver);
         String className = tp.redBoxClass().getAttribute("class");
         tp.insertClass().sendKeys(className);
     }
 
-    @Test
+    @Test (groups = {"even"})
     public void seventhTask() {
         //TasksPage tp = new TasksPage(driver);
         ((JavascriptExecutor)driver).executeScript("ran_this_js_function();");
     }
 
-    @Test
+    @Test (groups = {"odd"})
     public void eighthTask() {
        TasksPage tp = new TasksPage(driver);
        JavascriptExecutor j = (JavascriptExecutor) driver;
-       Object result = j.executeScript("return got_return_from_js_function();");
+       Object result = j.executeScript("returnn got_return_from_js_function();");
        String numb = String.valueOf(result);
        tp.insertJsFunction().sendKeys(numb);
     }
 
-    @Test
+    @Test (groups = {"even"})
     public void ninthTask() {
         TasksPage tp = new TasksPage(driver);
         tp.writtenBook().click();
     }
 
-    @Test
+    @Test (groups = {"odd"})
     public void tenthTask() {
         TasksPage tp = new TasksPage(driver);
         String redBoxText = tp.redBoxClass().getText();
         tp.insertRedBoxText().sendKeys(redBoxText);
     }
 
-    @Test
+    @Test (groups = {"even"})
     public void eleventhTask() {
         TasksPage tp = new TasksPage(driver);
         JavascriptExecutor j = (JavascriptExecutor) driver;
@@ -113,7 +113,7 @@ public class SeleniumPlayGround extends BasicOperations {
         tp.insertColor().sendKeys(finalColor);
     }
 
-    @Test
+    @Test (groups = {"odd"})
     public void twelfthTask() {
         TasksPage tp = new TasksPage(driver);
         int width = 850;
@@ -122,7 +122,7 @@ public class SeleniumPlayGround extends BasicOperations {
         driver.manage().window().setSize(dimension);
     }
 
-    @Test
+    @Test (groups = {"even"})
     public void thirteenthTask() {
         TasksPage tp = new TasksPage(driver);
         String yes = "yes";
@@ -134,7 +134,7 @@ public class SeleniumPlayGround extends BasicOperations {
             tp.insertYesNo().sendKeys(no);
         }
     }
-    @Test
+    @Test (groups = {"odd"})
     public void fourtheenthTask() {
         TasksPage tp = new TasksPage(driver);
         Boolean condition = tp.yesNoBox().isDisplayed();
@@ -147,7 +147,7 @@ public class SeleniumPlayGround extends BasicOperations {
         }
     }
 
-    @Test
+    @Test (groups = {"even", "odd"})
     public void fifteenthTaskAndSixteenthTask()  {
         TasksPage tp = new TasksPage(driver);
         tp.clickOnSign().click();
@@ -160,13 +160,13 @@ public class SeleniumPlayGround extends BasicOperations {
         alert.accept();
     }
 
-    @Test
+    @Test (groups = {"even"})
     public void seventeenthTask() {
         TasksPage tp = new TasksPage(driver);
         tp.clickSubmit().click();
     }
 
-    @AfterTest
+    @AfterTest (groups = {"even", "odd"})
     public void pointsCheck() {
         TasksPage tp = new TasksPage(driver);
         tp.clickCheckResults().click();
@@ -174,7 +174,7 @@ public class SeleniumPlayGround extends BasicOperations {
         System.out.println(results);
     }
 
-   @AfterSuite
+   @AfterSuite (groups = {"even", "odd"})
     public void exitBrowser1() {
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         driver.close();
